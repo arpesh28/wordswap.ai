@@ -1,5 +1,6 @@
 "use client";
 
+import axios from "axios";
 import Image from "next/image";
 import { useRef, useState } from "react";
 import { Toaster, toast } from "react-hot-toast";
@@ -7,7 +8,6 @@ import DropDown, { LanguageType } from "../components/DropDown";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import LoadingDots from "../components/LoadingDots";
-import { translateText } from "../lib/openai";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
@@ -31,13 +31,15 @@ export default function Home() {
     setGeneratedTexts("");
     setLoading(true);
 
-    translateText(text, lang.name).then((response: string | null) => {
-      if (response !== null) {
-        setGeneratedTexts(response);
-      }
-      scrollToTexts();
-      setLoading(false);
+    const res = await axios.post("/api/translate", {
+      text,
+      lang: lang.name,
     });
+
+    setGeneratedTexts(res.data.message);
+
+    scrollToTexts();
+    setLoading(false);
   };
 
   return (
