@@ -5,7 +5,7 @@ module.exports = {
     return [
       {
         source: "/github",
-        destination: "https://github.com/arpesh28/wordswap-ai",
+        destination: "https://github.com/arpesh28/wordswap.ai",
         permanent: false,
       },
       {

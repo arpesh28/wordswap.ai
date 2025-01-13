@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useRef, useState } from "react";
 import { Toaster, toast } from "react-hot-toast";
-import DropDown, { VibeType } from "../components/DropDown";
+import DropDown, { LanguageType } from "../components/DropDown";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import LoadingDots from "../components/LoadingDots";
@@ -11,7 +11,10 @@ import LoadingDots from "../components/LoadingDots";
 export default function Home() {
   const [loading, setLoading] = useState(false);
   const [bio, setBio] = useState("");
-  const [vibe, setVibe] = useState<VibeType>("Professional");
+  const [lang, setLang] = useState<LanguageType>({
+    code: "fr",
+    name: "French",
+  });
   const [generatedBios, setGeneratedBios] = useState<String>("");
 
   const bioRef = useRef<null | HTMLDivElement>(null);
@@ -72,7 +75,7 @@ export default function Home() {
             <p className="font-medium text-left">Select Translation Language</p>
           </div>
           <div className="block">
-            <DropDown vibe={vibe} setVibe={(newVibe) => setVibe(newVibe)} />
+            <DropDown lang={lang} setLang={(newlang) => setLang(newlang)} />
           </div>
           {loading ? (
             <button

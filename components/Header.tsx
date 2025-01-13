@@ -16,7 +16,7 @@ export default function Header() {
       </Link>
       <a
         className="flex items-center justify-center px-4 py-2 space-x-2 text-sm text-gray-600 transition-colors bg-white border border-gray-300 rounded-full shadow-md max-w-fit hover:bg-gray-100"
-        href="https://github.com/arpesh28/wordswap-ai"
+        href="https://github.com/arpesh28/wordswap.ai"
         target="_blank"
         rel="noopener noreferrer"
       >

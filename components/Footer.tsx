@@ -6,7 +6,7 @@ export default function Footer() {
       <div>
         Powered by{" "}
         <a
-          href="https://together.ai"
+          href="https://openai.com/"
           target="_blank"
           rel="noreferrer"
           className="font-bold transition hover:underline underline-offset-2"
@@ -16,9 +16,10 @@ export default function Footer() {
       </div>
       <div className="flex pb-4 space-x-4 sm:pb-0">
         <Link
-          href="https://twitter.com/arpesh28"
+          href="https://x.com/thesloppykind"
           className="group"
           aria-label="TaxPal on Twitter"
+          target="_blank"
         >
           <svg
             aria-hidden="true"
@@ -28,9 +29,10 @@ export default function Footer() {
           </svg>
         </Link>
         <Link
-          href="https://github.com/arpesh28/wordswap-ai"
+          href="https://github.com/arpesh28/wordswap.ai"
           className="group"
           aria-label="TaxPal on GitHub"
+          target="_blank"
         >
           <svg
             aria-hidden="true"

@@ -1,39 +1,53 @@
-import { Menu, Transition } from "@headlessui/react";
+import {
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuItems,
+  Transition,
+} from "@headlessui/react";
 import {
   CheckIcon,
   ChevronDownIcon,
   ChevronUpIcon,
 } from "@heroicons/react/20/solid";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
+import { languageList } from "../lib/constants";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-export type VibeType = "Professional" | "Casual" | "Funny";
+export type LanguageType = {
+  code: string;
+  name: string;
+};
 
 interface DropDownProps {
-  vibe: VibeType;
-  setVibe: (vibe: VibeType) => void;
+  lang: LanguageType;
+  setLang: (lang: LanguageType) => void;
 }
 
-let vibes: VibeType[] = ["Professional", "Casual", "Funny"];
+export default function DropDown({ lang, setLang }: DropDownProps) {
+  const [searchTerm, setSearchTerm] = useState("");
 
-export default function DropDown({ vibe, setVibe }: DropDownProps) {
+  const filteredLanguages = languageList.filter((langItem) =>
+    langItem.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
-    <Menu as="div" className="relative block text-left w-full">
+    <Menu as="div" className="relative block w-full text-left">
       <div>
-        <Menu.Button className="inline-flex w-full justify-between items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-black">
-          {vibe}
+        <MenuButton className="inline-flex items-center justify-between w-full px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-black">
+          {lang?.name}
           <ChevronUpIcon
-            className="-mr-1 ml-2 h-5 w-5 ui-open:hidden"
+            className="w-5 h-5 ml-2 -mr-1 ui-open:hidden"
             aria-hidden="true"
           />
           <ChevronDownIcon
-            className="-mr-1 ml-2 h-5 w-5 hidden ui-open:block"
+            className="hidden w-5 h-5 ml-2 -mr-1 ui-open:block"
             aria-hidden="true"
           />
-        </Menu.Button>
+        </MenuButton>
       </div>
 
       <Transition
@@ -44,33 +58,41 @@ export default function DropDown({ vibe, setVibe }: DropDownProps) {
         leave="transition ease-in duration-75"
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
+        afterLeave={() => setSearchTerm("")}
       >
-        <Menu.Items
-          className="absolute left-0 z-10 mt-2 w-full origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-          key={vibe}
+        <MenuItems
+          className="absolute left-0 z-10 w-full mt-2 overflow-y-auto origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none max-h-60"
+          key={lang.code}
         >
-          <div className="">
-            {vibes.map((vibeItem) => (
-              <Menu.Item key={vibeItem}>
-                {({ active }) => (
+          <div className="p-2">
+            <input
+              type="text"
+              placeholder="Search..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full px-3 py-2 mb-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+            />
+            {filteredLanguages.map((langItem) => (
+              <MenuItem key={langItem?.code}>
+                {({ focus }) => (
                   <button
-                    onClick={() => setVibe(vibeItem)}
+                    onClick={() => setLang(langItem)}
                     className={classNames(
-                      active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                      vibe === vibeItem ? "bg-gray-200" : "",
+                      focus ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                      lang?.code === langItem?.code ? "bg-gray-200" : "",
                       "px-4 py-2 text-sm w-full text-left flex items-center space-x-2 justify-between"
                     )}
                   >
-                    <span>{vibeItem}</span>
-                    {vibe === vibeItem ? (
+                    <span>{langItem?.name}</span>
+                    {lang?.code === langItem?.code ? (
                       <CheckIcon className="w-4 h-4 text-bold" />
                     ) : null}
                   </button>
                 )}
-              </Menu.Item>
+              </MenuItem>
             ))}
           </div>
-        </Menu.Items>
+        </MenuItems>
       </Transition>
     </Menu>
   );
