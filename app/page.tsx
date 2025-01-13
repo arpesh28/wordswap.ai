@@ -8,6 +8,7 @@ import DropDown, { LanguageType } from "../components/DropDown";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import LoadingDots from "../components/LoadingDots";
+import Link from "next/link";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
@@ -46,9 +47,13 @@ export default function Home() {
     <div className="flex flex-col items-center justify-center max-w-5xl min-h-screen py-2 mx-auto">
       <Header />
       <main className="flex flex-col items-center justify-center flex-1 w-full px-4 mt-12 text-center sm:mt-20">
-        <p className="px-4 py-1 mb-5 text-sm transition duration-300 ease-in-out border rounded-2xl text-slate-500 hover:scale-105">
-          <b>126,657</b> texts generated so far
-        </p>
+        <Link
+          href="https://www.arpesh.in/"
+          target="_blank"
+          className="px-4 py-1 mb-5 text-sm transition duration-300 ease-in-out border rounded-2xl text-slate-500 hover:scale-105 "
+        >
+          Developed by <b>Arpesh Gadekar</b>
+        </Link>
         <h1 className="sm:text-6xl text-4xl max-w-[708px] font-bold text-slate-900">
           Seamless Translation for Any Text You Need
         </h1>
@@ -68,10 +73,16 @@ export default function Home() {
             value={text}
             onChange={(e) => setText(e.target.value)}
             rows={4}
-            className="w-full my-5 border-gray-300 rounded-md shadow-sm focus:border-black focus:ring-black"
+            className="w-full mt-5 border-gray-300 rounded-md shadow-sm focus:border-black focus:ring-black"
             placeholder={"e.g. Who are you?"}
+            maxLength={80}
           />
-          <div className="flex items-center mb-5 space-x-3">
+          {text?.length > 79 && (
+            <p className="text-sm text-orange-400">
+              Maximum of 80 characters are allowed.
+            </p>
+          )}
+          <div className="flex items-center my-5 space-x-3">
             <Image src="/2-black.png" width={30} height={30} alt="1 icon" />
             <p className="font-medium text-left">Select Translation Language</p>
           </div>
@@ -108,7 +119,7 @@ export default function Home() {
                   className="mx-auto text-3xl font-bold sm:text-4xl text-slate-900"
                   ref={textRef}
                 >
-                  Your generated text
+                  Your Translated Text
                 </h2>
               </div>
               <div className="flex flex-col items-center justify-center max-w-xl mx-auto space-y-8">

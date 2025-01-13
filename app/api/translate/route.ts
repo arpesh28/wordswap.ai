@@ -17,6 +17,7 @@ export async function POST(request: Request) {
           content: text,
         },
       ],
+      max_tokens: 20,
     });
     return new Response(
       JSON.stringify({ message: response?.choices?.[0]?.message?.content }),
