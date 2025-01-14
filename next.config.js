@@ -10,7 +10,7 @@ module.exports = {
       },
       {
         source: "/deploy",
-        destination: "https://vercel.com/templates/next.js/wordswap-ai",
+        destination: "https://vercel.com/arpesh-gadekars-projects/wordswap-ai",
         permanent: false,
       },
     ];
