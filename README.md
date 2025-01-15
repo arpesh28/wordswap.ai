@@ -64,10 +64,9 @@ WordSwap.ai is a simple language translator web application built with **Next.js
 
 ## Demo
 
-Watch the demo of the app on youtube
-[Watch Demo Video on YouTube](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
+![WordSwap.ai Screenshot](./public/screenshot.png)
 
-<iframe width="560" height="315" src="https://www.youtube.com/shorts/huSIXQQyTNM" frameborder="0" allowfullscreen></iframe>
+[![Watch the video](./public/thumbnail.jpg)](https://www.youtube.com/shorts/huSIXQQyTNM)
 
 ---
 
