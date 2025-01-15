@@ -1,5 +1,9 @@
 import OpenAI from "openai";
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+  baseURL:
+    "https://gateway.ai.cloudflare.com/v1/59ab2bc2a5cd4af205f2b018f61f0f97/translator-ai/openai/",
+});
 
 export async function POST(request: Request) {
   const { lang, text } = await request.json();
